@@ -35,7 +35,10 @@
                     <tr>
                         <td class="mainContent">
                             <div class="window">
-                                <h1>~~~ Test 1 ~~~</h1>
+                                <img src="/assets/mossy icon.png" alt="Mossy's profile picture" width=230px>
+                                <h1>Mossy Jimmerson</h1>
+                                <h4>She/They</h4>
+                                <p>I'm a computer science major, with a minor in American Sign Language. I graduate this spring (2026). My strongest skills are in design, including layout, color schemes, and formatting.</p>
                             </div>
                         </td>
                         <td class="mainContent">

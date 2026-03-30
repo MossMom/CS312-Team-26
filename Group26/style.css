@@ -41,6 +41,10 @@
     margin-right: auto;
 }
 
+#containerTable td {
+    vertical-align: top;
+}
+
 #banner {
     max-width: 800;
     margin-left: auto;
