@@ -28,19 +28,12 @@
                         <a href="color.php">Color Coordinator</a>
                     </nav>
                 </div>
-                
             </header>
 
-            <div>
-                <table cellspacing="20px" id="containerTable">
-                    <tr>
-                        <td class="mainContent">
-                            <div class="window">
-                                <h1>~~~~~~~~~~~ Test ~~~~~~~~~~~</h1>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+            <div class="mainContentBig">
+                <div class="window">
+                    <h1>~~~~~~~~~~~ Test ~~~~~~~~~~~</h1>
+                </div>
             </div>
 
             <footer>
