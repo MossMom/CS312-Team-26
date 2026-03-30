@@ -1,0 +1,75 @@
+.boxConstraint {
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.window {
+    background: black;
+    border: 3px solid white;
+    border-radius: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+    width: 750px;
+}
+
+.mainContent .window {
+    width: 500px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.mainContentBig .window {
+    width: 750px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.sideBar .window {
+    width: 235px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#containerTable td {
+    vertical-align: top;
+}
+
+#banner {
+    max-width: 800;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#navBar {
+    background: grey;
+    border: 3px solid white;
+    border-radius: 5px;
+    text-align: center;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 50px;
+    padding-right: 50px;
+    width: max-content;
+    margin: auto;
+}
+
+body {
+    font-size: medium;
+    color: white;
+    text-align: center;
+    background-color: #18161c;
+}
+
+footer {
+    text-align: center;
+    margin-top: auto;
+    border-top: white;
+    background-color: grey;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    background-size: auto;
+    flex-shrink: 0;
+}
