@@ -1,3 +1,10 @@
+:root {
+    --main-color: #18161c;
+    --accent-color: #3c2a84;
+    --grey-color: #242424;
+    --highlight-color: #95bdf8;
+}
+
 .boxConstraint {
     width: 800px;
     margin-left: auto;
@@ -5,8 +12,8 @@
 }
 
 .window {
-    background: black;
-    border: 3px solid white;
+    background: var(--main-color);
+    border: 3px solid var(--highlight-color);
     border-radius: 10px;
     padding: 5px;
     box-sizing: border-box;
@@ -53,8 +60,8 @@
 }
 
 #navBar {
-    background: gray;
-    border: 3px solid white;
+    background: var(--grey-color);
+    border: 3px solid var(--highlight-color);
     border-radius: 5px;
     text-align: center;
     padding-top: 3px;
@@ -69,17 +76,27 @@ body {
     font-size: medium;
     color: white;
     text-align: center;
-    background-color: #18161c;
+    background-color: var(--main-color);
 }
 
 footer {
     text-align: center;
     margin-top: auto;
-    border-top: white;
-    background-color: grey;
+    border-top: 3px solid var(--highlight-color);
+    background-color: var(--grey-color);
     padding: 5px;
     display: flex;
     flex-direction: column;
     background-size: auto;
     flex-shrink: 0;
+}
+
+nav a {
+    color: white;
+    font-size: large;
+    padding: 5px;
+}
+
+a:link {
+    color: var(--highlight-color);
 }

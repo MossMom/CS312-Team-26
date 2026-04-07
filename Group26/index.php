@@ -32,7 +32,10 @@
 
             <div class="mainContentBig">
                 <div class="window">
-                    <h1>~~~~~~~~~~~ Test ~~~~~~~~~~~</h1>
+                    <h1>Welcome!</h1>
+                    <p>Thank you for visiting our Color Picker!</p>
+                    <p>Use the navigation bar above to explore our site, and find the perfect color scheme for your next project!</p>
+                    <p>We hope you enjoy our site, and find it useful!</p>
                 </div>
             </div>
 
