@@ -18,7 +18,7 @@
         <div class="boxConstraint">
             <header>
                 <div id="banner" class="window">
-                    <h1>[] Color Picker</h1>
+                    <img src="assets/logo long.png" width=500px alt="Banner Logo Image">
                 </div>
                 <br>
                 <div id="navBar">
