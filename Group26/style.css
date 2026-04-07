@@ -2,8 +2,8 @@
     --main-color: #18161c;
     --accent-color: #3c2a84;
     --grey-color: #242424;
-    --highlight-color: #95bdf8;
-    --darker-highlight-color: #6485cc;
+    --highlight-color: #a6caff; /* Contrast with --main-color 10.69:1 */
+    --darker-highlight-color: #87A4E3; /* Contrast with --main-color 7.21:1 */
 }
 
 .boxConstraint {
@@ -99,9 +99,9 @@ nav a {
 }
 
 a:link {
-    color: var(--highlight-color);
+    color: white;
 }
 
 a:visited {
-    color: var(--darker-highlight-color);
+    color: var(--highlight-color);
 }
