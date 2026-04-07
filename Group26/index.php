@@ -5,8 +5,9 @@
         <link href="style.css" rel="stylesheet">
 
         <title>
-            [] Home Page
+            Palette Perfect Home Page
         </title>
+        <link rel="icon" href="/assets/logo icon.png" type="image/png">
 
         <meta charset="UTF-8">
         <meta name="description" content="T26's Home Page">
@@ -36,6 +37,7 @@
                     <p>Thank you for visiting our Color Picker!</p>
                     <p>Use the navigation bar above to explore our site, and find the perfect color scheme for your next project!</p>
                     <p>We hope you enjoy our site, and find it useful!</p>
+                    <p>Feel free to reach out to us with any questions, comments, or concerns! <a href="https://youtu.be/Aq5WXmQQooo?si=D2YDgp0sY4rx5uo0">Contact Us</a></p>
                 </div>
             </div>
 

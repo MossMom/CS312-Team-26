@@ -5,8 +5,9 @@
         <link href="style.css" rel="stylesheet">
 
         <title>
-            [] About Page
+            Palette Perfect About Page
         </title>
+        <link rel="icon" href="/assets/logo icon.png" type="image/png">
 
         <meta charset="UTF-8">
         <meta name="description" content="T26's About Page">
