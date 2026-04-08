@@ -33,7 +33,98 @@
 
             <div class="mainContentBig">
                 <div class="window">
-                    <h1>~~~~~~~~~~~ Test ~~~~~~~~~~~</h1>
+                    <h2>Create Color Grid</h2>
+
+                    <?php
+                        // Possible errors
+                        $sizeError = "";
+                        $colorError = "";
+
+                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+                            $size = intval($_POST["size"]);
+                            $colors = intval($_POST["colors"]);
+
+                            // Validate number of rows, columns
+                            if ($size < 1 || $size > 26) {
+                                $sizeError = "Rows and Columns must be between 1 and 26.";
+                            }
+
+                            // Validate Number of Colors
+                            if ($colors < 1 || $colors > 10) {
+                                $colorError = "Number of Colors must be between 1 and 10.";
+                            }
+
+                            // Show error box if there are errors
+                            if ($sizeError || $colorError) {
+                                echo "<div class='error-box'>";
+
+                                if ($sizeError) {
+                                    echo "<p>$sizeError</p>";
+                                }
+
+                                if ($colorError) {
+                                    echo "<p>$colorError</p>";
+                                }
+
+                                echo "</div>";
+                            }
+                        }
+                        ?>
+                        <form method="post" action="">
+                            <label for="size">Rows and Columns (1-26):</label><br>
+                            <input type="number" id="size" name="size"><br><br>
+
+                            <label for="colors">Number of Colors (1-10):</label><br>
+                            <input type="number" id="colors" name="colors" ><br><br>
+
+                            <input type="submit" value="Generate Table">
+                        </form>
+
+                        <?php
+                    
+                        if ($_SERVER["REQUEST_METHOD"] == "POST" && !$sizeError && !$colorError) {
+
+                            $colorList = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Grey", "Brown", "Black", "Teal"];
+
+                            echo "<h3>Select Colors</h3>";
+
+                            // Space for duplicate warnings
+                            echo "<div id='message' style='color: red; margin-bottom: 10px;'></div>";
+
+                            echo "<table style='width: 90%;'>";
+
+                            for ($i = 0; $i < $colors; $i++) {
+
+                                echo "<tr>";
+
+                                // Left column. 20%
+                                echo "<td style='width: 20%; padding: 5px;'>";
+
+                                echo "<select class='colorSelect'>";
+
+                                foreach ($colorList as $index => $color) {
+
+                                    // Set unique default selection
+                                    $selected = ($index == $i) ? "selected" : "";
+
+                                    echo "<option value='$color' $selected>$color</option>";
+                                }
+
+                                echo "</select>";
+                                echo "</td>";
+
+                                // Right column. 80% 
+                                echo "<td class='preview' style='width: 80%; padding: 5px;'>";
+                                echo $colorList[$i];
+                                echo "</td>";
+
+                                echo "</tr>";
+                            }
+
+                            echo "</table>";
+                        }
+                        ?>
                 </div>
             </div>
 
@@ -42,6 +133,9 @@
                     <h5>Webpage made by Mossy, Jack, & Elijah</h5>
                 </div>
             </footer>
-        </div>    
+        </div> 
+
+        <!-- Script (currently) to check that color choices are unique -->
+        <script src="script.js"></script>   
     </body>
 </html>
