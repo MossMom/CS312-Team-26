@@ -36,6 +36,8 @@
                     <h2>Create Color Grid</h2>
 
                     <?php
+                        // 4.2: Input validation
+
                         // Possible errors
                         $sizeError = "";
                         $colorError = "";
@@ -71,6 +73,7 @@
                             }
                         }
                         ?>
+                        <!-- 4.1: Input Form -->
                         <form method="post" action="">
                             <label for="size">Rows and Columns (1-26):</label><br>
                             <input type="number" id="size" name="size"><br><br>
@@ -82,7 +85,8 @@
                         </form>
 
                         <?php
-                    
+
+                        // 4.3: Top Table: Color List
                         if ($_SERVER["REQUEST_METHOD"] == "POST" && !$sizeError && !$colorError) {
 
                             $colorList = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Grey", "Brown", "Black", "Teal"];
@@ -118,6 +122,46 @@
                                 echo "<td class='preview' style='width: 80%; padding: 5px;'>";
                                 echo $colorList[$i];
                                 echo "</td>";
+
+                                echo "</tr>";
+                            }
+
+                            echo "</table>";
+
+                            // 4.4 Bottom Table: Coordinate Grid. displayed: n+1 rows, n+1 columns. Row labeled with numbers, column letters.
+                            echo "<h3>Coordinate Grid</h3>";
+
+                            echo "<table style='width: 90%; table-layout: fixed;'>";
+
+                            // rows 0 to n
+                            for ($row = 0; $row <= $size; $row++) {
+
+                                echo "<tr>";
+
+                                // columns 0 to n
+                                for ($column = 0; $column <= $size; $column++) {
+
+                                    echo "<td style='border: 1px solid black; text-align: center; height: 30px;'>";
+
+                                    // Top left corner is empty
+                                    if ($row == 0 && $column == 0) {
+                                        echo "";
+
+                                    // Top row (A–Z)
+                                    } elseif ($row == 0) {
+                                        echo chr(64 + $column); //ASCII A=65 
+
+                                    // Left column (1–n)
+                                    } elseif ($column == 0) {
+                                        echo $row;
+
+                                    // Grid cells all empty for now
+                                    } else {
+                                        echo "";
+                                    }
+
+                                    echo "</td>";
+                                }
 
                                 echo "</tr>";
                             }
