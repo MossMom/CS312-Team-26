@@ -169,6 +169,14 @@
                             echo "</table>";
                         }
                         ?>
+                        <br>
+                        <?php if ($_SERVER["REQUEST_METHOD"] == "POST" && !$sizeError && !$colorError): ?>
+                            <form method="post" action="print.php" target="_blank">
+                                <input type="hidden" name="size" value="<?php echo $size; ?>">
+                                <input type="hidden" name="colors" value="<?php echo $colors; ?>">
+                                <button type="submit">Print Color Scheme</button>
+                            </form>
+                        <?php endif; ?>
                 </div>
             </div>
 
