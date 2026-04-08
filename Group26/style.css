@@ -1,9 +1,9 @@
 :root {
-   --main-color: #18161c;
-   --accent-color: #3c2a84;
-   --grey-color: #242424;
-   --highlight-color: #a6caff; /* Contrast with --main-color 10.69:1 */
-   --darker-highlight-color: #87a4e3; /* Contrast with --main-color 7.21:1 */
+    --main-color: #18161c; /* Contrast with white 17.94:1 */
+    --accent-color: #3c2a84;
+    --grey-color: #242424; /* Contrast with white 15.52:1 */
+    --highlight-color: #a6caff; /* Contrast with --main-color 10.69:1 */
+    --darker-highlight-color: #87A4E3; /* Contrast with --main-color 7.21:1 */
 }
 
 .boxConstraint {
@@ -99,7 +99,7 @@ nav a {
 }
 
 a:link {
-   color: white;
+    color: var(--highlight-color);
 }
 
 a:visited {

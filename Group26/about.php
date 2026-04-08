@@ -44,7 +44,7 @@
                         </td>
                         <td class="mainContent">
                             <div class="window">
-                                <img src="https://avatars.githubusercontent.com/u/83429550?v=4" width="100" alt="Image of Elijah Gillit">
+                                <img src="https://avatars.githubusercontent.com/u/83429550?v=4" width="230" alt="Image of Elijah Gillit">
                                 <h1>Elijah Gillit</h1>
                                 <p>Hello! I'm a Computer Science major with the Software Engineering concentration. I enjoy all kinds of art, especially music, film, books, gaming. I enjoy messing around with web development too.</p>
                             </div>
