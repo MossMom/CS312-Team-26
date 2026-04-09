@@ -36,7 +36,7 @@
                     <tr>
                         <td class="mainContent">
                             <div class="window">
-                                <img src="/assets/mossy icon.png" alt="Mossy's profile picture" width=230px>
+                                <img src="assets/mossy icon.png" alt="Mossy's profile picture" width=230px>
                                 <h1>Mossy Jimmerson</h1>
                                 <h4>She/They</h4>
                                 <p>I'm a computer science major, with a minor in American Sign Language. I graduate this spring (2026). My strongest skills are in design, including layout, color schemes, and formatting.</p>
@@ -51,7 +51,7 @@
                         </td>
                         <td class="mainContent">
                             <div class="window">
-                                <img src="/assets/jack_headshot.png" alt="An artistic cartoony rendition of Jack. Not AI generated, comissioned a real artist for this." width=230px>
+                                <img src="assets/jack_headshot.png" alt="An artistic cartoony rendition of Jack. Not AI generated, comissioned a real artist for this." width=230px>
                                 <h1>Jack Birlingmair</h1>
                                 <p>I am a 22 y/o pursuing a Bachelors in Science for Computer Science with a minor in Spanish Languages. Some of my hobbies and interests include general computer technology, being in nature, and doing photography for fun.</p>
                             </div>
