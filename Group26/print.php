@@ -42,13 +42,13 @@ $colorList = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Grey", "Bro
 
         <!-- Coordinate Grid -->
         <h3>Coordinate Grid</h3>
-        <table style="width: 90%; table-layout: fixed;">
+        <table style='table-layout: fixed; border-collapse: collapse;'>
             <?php
             for ($row = 0; $row <= $size; $row++) {
                 echo "<tr>";
 
                 for ($column = 0; $column <= $size; $column++) {
-                    echo "<td>";
+                    echo "<td style='border: 1px solid black; text-align: center; width: 30px; height: 30px;'>";
 
                     if ($row == 0 && $column == 0) {
                         echo "";
