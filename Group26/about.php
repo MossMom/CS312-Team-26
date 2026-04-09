@@ -51,7 +51,9 @@
                         </td>
                         <td class="mainContent">
                             <div class="window">
-                                <h1>~~~ Test 3 ~~~</h1>
+                                <img src="/assets/jack_headshot.png" alt="An artistic cartoony rendition of Jack. Not AI generated, comissioned a real artist for this." width=230px>
+                                <h1>Jack Birlingmair</h1>
+                                <p>I am a 22 y/o pursuing a Bachelors in Science for Computer Science with a minor in Spanish Languages. Some of my hobbies and interests include general computer technology, being in nature, and doing photography for fun.</p>
                             </div>
                         </td>
                     </tr>
