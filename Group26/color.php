@@ -131,7 +131,7 @@
                             // 4.4 Bottom Table: Coordinate Grid. displayed: n+1 rows, n+1 columns. Row labeled with numbers, column letters.
                             echo "<h3>Coordinate Grid</h3>";
 
-                            echo "<table style='width: 90%; table-layout: fixed;'>";
+                            echo "<table style='table-layout: fixed; border-collapse: collapse;'>";
 
                             // rows 0 to n
                             for ($row = 0; $row <= $size; $row++) {
@@ -141,7 +141,7 @@
                                 // columns 0 to n
                                 for ($column = 0; $column <= $size; $column++) {
 
-                                    echo "<td style='border: 1px solid black; text-align: center; height: 30px;'>";
+                                    echo "<td style='border: 1px solid black; text-align: center; width: 30px; height: 30px;'>";
 
                                     // Top left corner is empty
                                     if ($row == 0 && $column == 0) {
