@@ -1,0 +1,1 @@
+<!-- colors_dynamic.php is a PHP file that outputs CSS. It reads your colors table from the database and generates the styles needed to paint grid cells with the correct hex colors at runtime. It is linked as a stylesheet in color.php. -->

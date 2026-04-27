@@ -1,0 +1,1 @@
+<!-- colors.php is the new Color Selection page where users can add, edit, and delete colors from the database. Add this page to your site navigation alongside the existing pages. -->

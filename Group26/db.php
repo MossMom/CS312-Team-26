@@ -1,0 +1,1 @@
+<!-- db.php holds your database connection. Every page that reads from or writes to the database should include this file at the top using require. -->
