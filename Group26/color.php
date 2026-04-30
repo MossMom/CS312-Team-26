@@ -82,18 +82,48 @@
                         // Message area
                         echo "<div id='message' style='color:red; margin-bottom:10px;'></div>";
 
-                        echo "<table style='width:90%; border-collapse:collapse;'>";
+                        // echo "<table style='width:90%; border-collapse:collapse;'>";
+
+                        // for ($i = 0; $i < $colors; $i++) {
+
+                        //     echo "<tr>";
+
+                        //     // LEFT COLUMN (radio + dropdown)
+                        //     echo "<td style='width:20%; padding:5px;'>";
+
+                        //     $checked = ($i == 0) ? "checked" : "";
+                        //     // Radio button for selected color
+                        //     echo "<input type='radio' name='activeColor' class='activeRadio' $checked>";
+
+                        //     echo "<select class='colorSelect'>";
+
+                        //     foreach ($colorList as $index => $color) {
+                        //         $selected = ($index == $i) ? "selected" : "";
+                        //         echo "<option value='$color' $selected>$color</option>";
+                        //     }
+
+                        //     echo "</select>";
+                        //     echo "</td>";
+
+                        //     // RIGHT COLUMN (coordinates for selected colors. One row per selected color.)
+                        //     echo "<td class='coordCell' style='width:80%; padding:5px;'></td>";
+
+                        //     echo "</tr>";
+                        // }
+
+                        // echo "</table>";
+
+                        echo "<table style='width:90%; border-collapse:collapse; margin-top:10px;'>";
 
                         for ($i = 0; $i < $colors; $i++) {
 
                             echo "<tr>";
 
-                            // LEFT COLUMN (radio + dropdown)
-                            echo "<td style='width:20%; padding:5px;'>";
+                            // LEFT COLUMN
+                            echo "<td style='width:20%; padding:8px; border:1px solid #ccc; background:#18161c;'>";
 
                             $checked = ($i == 0) ? "checked" : "";
-                            // Radio button for selected color
-                            echo "<input type='radio' name='activeColor' class='activeRadio' $checked>";
+                            echo "<input type='radio' name='activeColor' class='activeRadio' $checked> ";
 
                             echo "<select class='colorSelect'>";
 
@@ -105,8 +135,8 @@
                             echo "</select>";
                             echo "</td>";
 
-                            // RIGHT COLUMN (coordinates for selected colors. One row per selected color.)
-                            echo "<td class='coordCell' style='width:80%; padding:5px;'></td>";
+                            // RIGHT COLUMN (coordinates)
+                            echo "<td class='coordCell' style='width:80%; padding:8px; border:1px solid #ccc; background:#18161c;'></td>";
 
                             echo "</tr>";
                         }
