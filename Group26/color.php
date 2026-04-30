@@ -36,147 +36,136 @@
                     <h2>Create Color Grid</h2>
 
                     <?php
-                        // 4.2: Input validation
+                    $sizeError = "";
+                    $colorError = "";
 
-                        // Possible errors
-                        $sizeError = "";
-                        $colorError = "";
+                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                        $size = intval($_POST["size"]);
+                        $colors = intval($_POST["colors"]);
 
-                            $size = intval($_POST["size"]);
-                            $colors = intval($_POST["colors"]);
-
-                            // Validate number of rows, columns
-                            if ($size < 1 || $size > 26) {
-                                $sizeError = "Rows and Columns must be between 1 and 26.";
-                            }
-
-                            // Validate Number of Colors
-                            if ($colors < 1 || $colors > 10) {
-                                $colorError = "Number of Colors must be between 1 and 10.";
-                            }
-
-                            // Show error box if there are errors
-                            if ($sizeError || $colorError) {
-                                echo "<div class='error-box'>";
-
-                                if ($sizeError) {
-                                    echo "<p>$sizeError</p>";
-                                }
-
-                                if ($colorError) {
-                                    echo "<p>$colorError</p>";
-                                }
-
-                                echo "</div>";
-                            }
+                        if ($size < 1 || $size > 26) {
+                            $sizeError = "Rows and Columns must be between 1 and 26.";
                         }
-                        ?>
-                        <!-- 4.1: Input Form -->
-                        <form method="post" action="">
-                            <label for="size">Rows and Columns (1-26):</label><br>
-                            <input type="number" id="size" name="size"><br><br>
 
-                            <label for="colors">Number of Colors (1-10):</label><br>
-                            <input type="number" id="colors" name="colors" ><br><br>
+                        if ($colors < 1 || $colors > 10) {
+                            $colorError = "Number of Colors must be between 1 and 10.";
+                        }
 
-                            <input type="submit" value="Generate Table">
-                        </form>
+                        if ($sizeError || $colorError) {
+                            echo "<div class='error-box'>";
+                            if ($sizeError) echo "<p>$sizeError</p>";
+                            if ($colorError) echo "<p>$colorError</p>";
+                            echo "</div>";
+                        }
+                    }
+                    ?>
 
-                        <?php
+                    <!-- Form -->
+                    <form method="post" action="">
+                        <label>Rows and Columns (1-26):</label><br>
+                        <input type="number" name="size"><br><br>
 
-                        // 4.3: Top Table: Color List
-                        if ($_SERVER["REQUEST_METHOD"] == "POST" && !$sizeError && !$colorError) {
+                        <label>Number of Colors (1-10):</label><br>
+                        <input type="number" name="colors"><br><br>
 
-                            $colorList = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Grey", "Brown", "Black", "Teal"];
+                        <input type="submit" value="Generate Table">
+                    </form>
 
-                            echo "<h3>Select Colors</h3>";
+                    <?php
+                    if ($_SERVER["REQUEST_METHOD"] == "POST" && !$sizeError && !$colorError) {
 
-                            // Space for duplicate warnings
-                            echo "<div id='message' style='color: red; margin-bottom: 10px;'></div>";
+                        $colorList = ["Red","Orange","Yellow","Green","Blue","Purple","Grey","Brown","Black","Teal"];
 
-                            echo "<table style='width: 90%;'>";
+                        echo "<h3>Select Colors</h3>";
 
-                            for ($i = 0; $i < $colors; $i++) {
+                        // Message area
+                        echo "<div id='message' style='color:red; margin-bottom:10px;'></div>";
 
-                                echo "<tr>";
+                        echo "<table style='width:90%; border-collapse:collapse;'>";
 
-                                // Left column. 20%
-                                echo "<td style='width: 20%; padding: 5px;'>";
+                        for ($i = 0; $i < $colors; $i++) {
 
-                                echo "<select class='colorSelect'>";
+                            echo "<tr>";
 
-                                foreach ($colorList as $index => $color) {
+                            // LEFT COLUMN (radio + dropdown)
+                            echo "<td style='width:20%; padding:5px;'>";
 
-                                    // Set unique default selection
-                                    $selected = ($index == $i) ? "selected" : "";
+                            $checked = ($i == 0) ? "checked" : "";
+                            // Radio button for selected color
+                            echo "<input type='radio' name='activeColor' class='activeRadio' $checked>";
 
-                                    echo "<option value='$color' $selected>$color</option>";
-                                }
+                            echo "<select class='colorSelect'>";
 
-                                echo "</select>";
-                                echo "</td>";
-
-                                // Right column. 80% 
-                                echo "<td class='preview' style='width: 80%; padding: 5px;'>";
-                                echo $colorList[$i];
-                                echo "</td>";
-
-                                echo "</tr>";
+                            foreach ($colorList as $index => $color) {
+                                $selected = ($index == $i) ? "selected" : "";
+                                echo "<option value='$color' $selected>$color</option>";
                             }
 
-                            echo "</table>";
+                            echo "</select>";
+                            echo "</td>";
 
-                            // 4.4 Bottom Table: Coordinate Grid. displayed: n+1 rows, n+1 columns. Row labeled with numbers, column letters.
-                            echo "<h3>Coordinate Grid</h3>";
+                            // RIGHT COLUMN (coordinates for selected colors. One row per selected color.)
+                            echo "<td class='coordCell' style='width:80%; padding:5px;'></td>";
 
-                            echo "<table style='table-layout: fixed; border-collapse: collapse;'>";
+                            echo "</tr>";
+                        }
 
-                            // rows 0 to n
-                            for ($row = 0; $row <= $size; $row++) {
+                        echo "</table>";
 
-                                echo "<tr>";
+                        // GRID
+                        echo "<h3>Coordinate Grid</h3>";
+                        echo "<table style='table-layout:fixed; border-collapse:collapse;'>";
 
-                                // columns 0 to n
-                                for ($column = 0; $column <= $size; $column++) {
+                        for ($row = 0; $row <= $size; $row++) {
 
-                                    echo "<td style='border: 1px solid black; text-align: center; width: 30px; height: 30px;'>";
+                            echo "<tr>";
 
-                                    // Top left corner is empty
+                            for ($column = 0; $column <= $size; $column++) {
+
+                                // HEADER CELLS
+                                if ($row == 0 || $column == 0) {
+                                    echo "<td style='border:1px solid black; text-align:center; width:30px; height:30px;'>";
+
                                     if ($row == 0 && $column == 0) {
                                         echo "";
-
-                                    // Top row (A–Z)
                                     } elseif ($row == 0) {
-                                        echo chr(64 + $column); //ASCII A=65 
-
-                                    // Left column (1–n)
+                                        echo chr(64 + $column);
                                     } elseif ($column == 0) {
                                         echo $row;
-
-                                    // Grid cells all empty for now
-                                    } else {
-                                        echo "";
                                     }
 
                                     echo "</td>";
-                                }
 
-                                echo "</tr>";
+                                } else {
+                                    // CLICKABLE GRID CELL
+                                    $coord = chr(64 + $column) . $row;
+
+                                    echo "<td 
+                                            class='gridCell' 
+                                            data-coord='$coord'
+                                            style='border:1px solid black; text-align:center; width:30px; height:30px; cursor:pointer;'>
+                                        </td>";
+                                }
                             }
 
-                            echo "</table>";
+                            echo "</tr>";
                         }
-                        ?>
-                        <br>
-                        <?php if ($_SERVER["REQUEST_METHOD"] == "POST" && !$sizeError && !$colorError): ?>
-                            <form method="post" action="print.php" target="_blank">
-                                <input type="hidden" name="size" value="<?php echo $size; ?>">
-                                <input type="hidden" name="colors" value="<?php echo $colors; ?>">
-                                <button type="submit">Print Color Scheme</button>
-                            </form>
-                        <?php endif; ?>
+
+                        echo "</table>";
+                    }
+                    ?>
+
+                    <br>
+
+                    <?php if ($_SERVER["REQUEST_METHOD"] == "POST" && !$sizeError && !$colorError): ?>
+                        <form method="post" action="print.php" target="_blank">
+                            <input type="hidden" name="size" value="<?php echo $size; ?>">
+                            <input type="hidden" name="colors" value="<?php echo $colors; ?>">
+                            <button type="submit">Print Color Scheme</button>
+                        </form>
+                    <?php endif; ?>
+
                 </div>
             </div>
 
