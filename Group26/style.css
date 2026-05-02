@@ -117,3 +117,15 @@ a:visited {
    padding: 10px;
    margin-bottom: 15px;
 }
+
+.db tr:nth-child(even) {
+  background-color: var(--accent-color);
+}
+
+.db tr {
+   border-bottom: 3px solid var(--darker-highlight-color);
+}
+
+.db td {
+   height: 30px;
+}
