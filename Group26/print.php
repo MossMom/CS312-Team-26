@@ -1,10 +1,47 @@
 <!DOCTYPE html>
 
 <?php
+
 $size = intval($_POST["size"]);
 $colors = intval($_POST["colors"]);
 
-$colorList = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Grey", "Brown", "Black", "Teal"];
+$gridData = json_decode($_POST["gridData"], true);
+
+$grouped = [];
+
+if (!empty($_POST["gridData"])) {
+
+    $gridData = json_decode($_POST["gridData"], true);
+
+    if (is_array($gridData)) {
+        foreach ($gridData as $coord => $data) {
+
+            // safety check (IMPORTANT)
+            if (!isset($data["color"])) continue;
+
+            $color = $data["color"];
+
+            if (!isset($grouped[$color])) {
+                $grouped[$color] = [];
+            }
+
+            $grouped[$color][] = $coord;
+        }
+    }
+}
+
+$colorHex = [
+    "Red" => "#FF0000",
+    "Orange" => "#FFA500",
+    "Yellow" => "#FFFF00",
+    "Green" => "#008000",
+    "Blue" => "#0000FF",
+    "Purple" => "#800080",
+    "Grey" => "#808080",
+    "Brown" => "#A52A2A",
+    "Black" => "#000000",
+    "Teal" => "#008080"
+];
 ?>
 
 <html>
@@ -20,7 +57,7 @@ $colorList = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Grey", "Bro
             td { border: 1px solid black; text-align: center; padding: 5px; }
         }
         </style>
-        <img src="assets/logo long.png" width=500px class="grayscale" alt="Banner Logo Image">
+        <img src="assets/logo long.png" width=350px class="grayscale" alt="Banner Logo Image">
     </head>
 
     <body onload="window.print()">
@@ -29,12 +66,27 @@ $colorList = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Grey", "Bro
 
         <!-- Color Selection Table -->
         <h3>Select Colors</h3>
+
         <table style="width: 90%;">
             <?php
-            for ($i = 0; $i < $colors; $i++) {
+            foreach ($grouped as $color => $coords) {
+
+                $hex = $colorHex[$color] ?? "";
+
+                sort($coords);
+
                 echo "<tr>";
-                echo "<td style='width: 20%;'>" . $colorList[$i] . "</td>";
-                echo "<td style='width: 80%;'>" . $colorList[$i] . "</td>";
+
+                // LEFT: Color + HEX
+                echo "<td style='width: 20%;'>";
+                echo "$color — $hex";
+                echo "</td>";
+
+                // RIGHT: coordinate list
+                echo "<td style='width: 80%;'>";
+                echo implode(", ", $coords);
+                echo "</td>";
+
                 echo "</tr>";
             }
             ?>
@@ -42,7 +94,7 @@ $colorList = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Grey", "Bro
 
         <!-- Coordinate Grid -->
         <h3>Coordinate Grid</h3>
-        <table style='table-layout: fixed; border-collapse: collapse;'>
+        <table class="grid" style="table-layout: fixed; border-collapse: collapse;">
             <?php
             for ($row = 0; $row <= $size; $row++) {
                 echo "<tr>";

@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded', function () {
    const gridCells = document.querySelectorAll('.gridCell');
    const messageDiv = document.getElementById('message');
 
-   let cellMap = {};
+   window.cellMap = {};
+   const cellMap = window.cellMap;
 
    // Store previous dropdown values
    selects.forEach((select) => {
@@ -63,8 +64,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
          // If cell already painted, overwrite with the new color
          if (cellMap[coord]) {
-            // remove old color
             delete cellMap[coord];
+            this.style.backgroundColor = '';
          }
 
          // Paint
@@ -83,30 +84,45 @@ document.addEventListener('DOMContentLoaded', function () {
    // Update coordinate lists
    function updateCoordinates() {
       coordCells.forEach((cell) => (cell.textContent = ''));
-
+      
       let grouped = {};
-
+      
+      // group by COLOR (not rowIndex)
       Object.keys(cellMap).forEach((coord) => {
-         let row = cellMap[coord].rowIndex;
-
-         if (!grouped[row]) grouped[row] = [];
-         grouped[row].push(coord);
+         let color = cellMap[coord].color;
+      
+         if (!grouped[color]) grouped[color] = [];
+         grouped[color].push(coord);
       });
-
-      Object.keys(grouped).forEach((row) => {
-         let coords = grouped[row];
-         // Keep the clicked cell coordinates in sorted order
-         coords.sort((a, b) => {
-            let colA = a[0],
-               colB = b[0];
-            let rowA = parseInt(a.slice(1));
-            let rowB = parseInt(b.slice(1));
-
-            if (colA === colB) return rowA - rowB;
-            return colA.localeCompare(colB);
-         });
-
-         coordCells[row].textContent = coords.join(', ');
+   
+      // map each color row in the UI to its coordinates
+      selects.forEach((select, index) => {
+         let color = select.value;
+      
+         if (grouped[color]) {
+            let coords = grouped[color];
+         
+            // sort properly (A1, B2, etc.)
+            coords.sort((a, b) => {
+               let colA = a[0], colB = b[0];
+               let rowA = parseInt(a.slice(1));
+               let rowB = parseInt(b.slice(1));
+            
+               if (colA === colB) return rowA - rowB;
+               return colA.localeCompare(colB);
+            });
+         
+            coordCells[index].textContent = coords.join(', ');
+         }
       });
    }
+
+   window.prepareData = function () {
+      console.log("SUBMIT FIRED");
+      console.log(window.cellMap);
+
+      document.getElementById("gridData").value =
+         JSON.stringify(window.cellMap);
+   };
 });
+

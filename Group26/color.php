@@ -15,6 +15,9 @@
         <meta name="author" content="Mossy Jimmerson, Jack Birlingmair, Elijah Gillit">
     </head>
 
+    <!-- Script (currently) to check that color choices are unique -->
+    <script src="script.js"></script>  
+    
    <body>
         <div class="boxConstraint">
             <header>
@@ -189,9 +192,11 @@
                     <br>
 
                     <?php if ($_SERVER["REQUEST_METHOD"] == "POST" && !$sizeError && !$colorError): ?>
-                        <form method="post" action="print.php" target="_blank">
+                        <form method="post" action="print.php" target="_blank" onsubmit="prepareData()">
                             <input type="hidden" name="size" value="<?php echo $size; ?>">
                             <input type="hidden" name="colors" value="<?php echo $colors; ?>">
+                            <input type="hidden" name="gridData" id="gridData">
+
                             <button type="submit">Print Color Scheme</button>
                         </form>
                     <?php endif; ?>
@@ -204,9 +209,6 @@
                     <h5>Webpage made by Mossy, Jack, & Elijah</h5>
                 </div>
             </footer>
-        </div> 
-
-        <!-- Script (currently) to check that color choices are unique -->
-        <script src="script.js"></script>   
+        </div>  
     </body>
 </html>
