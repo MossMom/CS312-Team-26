@@ -1,0 +1,5 @@
+/* create table */
+CREATE TABLE colors (id int NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY, name varchar(255) NOT NULL UNIQUE, hex_value char(6) NOT NULL UNIQUE);
+
+/* pre-populate table */ 
+INSERT INTO colors (name, hex_value) VALUES ('Red', 'FF0000'), ('Orange', 'FFA500'), ('Yellow', 'FFFF00'), ('Green', '008000'), ('Blue', '0000FF'), ('Purple', '800080'), ('Grey', '808080'), ('Brown', 'A52A2A'), ('Black', '000000'), ('Teal', '008080');
