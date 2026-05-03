@@ -10,18 +10,15 @@ require 'db.php';
         <link href="style.css" rel="stylesheet">
 
         <title>
-            Palette Perfect Color Page
+            Palette Perfect Color Selection Page
         </title>
         <link rel="icon" href="/assets/logo icon.png" type="image/png">
 
         <meta charset="UTF-8">
-        <meta name="description" content="T26's Color Page">
-        <meta name="keywords" content="Color Picker">
+        <meta name="description" content="T26's Color Selection Page">
+        <meta name="keywords" content="Color Selection">
         <meta name="author" content="Mossy Jimmerson, Jack Birlingmair, Elijah Gillit">
     </head>
-
-    <!-- Script (currently) to check that color choices are unique -->
-    <script src="script.js"></script>  
     
    <body>
         <div class="boxConstraint">
@@ -43,15 +40,145 @@ require 'db.php';
             <div class="mainContentBig">
                 <div class="window">
                     <h2>Color Selection</h2>
-                    <div class="db">
-                    <?php 
-                        if ($conn) {
-                            echo "<p>DB connected</p>";
-                        }
-                        else {
-                            echo "<p>DB is not connected</p>";
-                        }
+                    <div class="db">      
 
+                    <table style='border-spacing:10px; margin:10px auto;'> <th>
+                    <?php
+                    $colorIsPresent = "";
+                    $hexIsPresent = "";
+
+                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                        if (isset($_POST['btnSubmit'][0])) {
+                            switch (strtolower($_POST['btnSubmit'][0])) {
+                                case 'editcolor':
+                                    echo '<h1>Edit button was clicked</h1>';
+                                    $colorName = strval($_POST["cname"]);
+                                    $hexValue = strval($_POST["hexval"]);
+                                    $colorID = substr(strval($_POST["colorlist"]), 1);
+
+                                    $color_query = mysqli_query($conn, "SELECT * FROM colors WHERE name = '$colorName'");
+
+                                    $hex_query = mysqli_query($conn, "SELECT * FROM colors WHERE hex_value = '$hexValue'");
+
+                                    if (mysqli_num_rows($color_query) > 0) {
+                                        $colorIsPresent = "Color name already exists in database. Choose another name.";
+                                    }
+
+                                    if (mysqli_num_rows($hex_query) > 0) {
+                                        $hexIsPresent = "Hex value already exists in database. Choose another hex value.";
+                                    }
+                                    else if (strlen($hexValue) != 6) {
+                                        $hexIsPresent = "Hex value is not correct length (should be exactly 6)";
+                                    }
+
+                                    if ($colorIsPresent || $hexIsPresent) {
+                                        echo "<div class='error-box'>";
+                                        if ($colorIsPresent) echo "<p>$colorIsPresent</p>";
+                                        if ($hexIsPresent) echo "<p>$hexIsPresent</p>";
+                                        echo "</div>";
+                                    }
+
+                                    else {
+                                        mysqli_query($conn, "UPDATE colors SET name = '$colorName', hex_value = '$hexValue' WHERE name = '$colorID'");
+                                    }
+                                    break;
+                                case 'addcolor':
+                                    echo '<h1>Add button was clicked</h1>';
+                                    $colorName = strval($_POST["cname"]);
+                                    $hexValue = strval($_POST["hexval"]);
+
+                                    $color_query = mysqli_query($conn, "SELECT * FROM colors WHERE name = '$colorName'");
+
+                                    $hex_query = mysqli_query($conn, "SELECT * FROM colors WHERE hex_value = '$hexValue'");
+
+                                    if (mysqli_num_rows($color_query) > 0) {
+                                        $colorIsPresent = "Color name already exists in database. Choose another name.";
+                                    }
+
+                                    if (mysqli_num_rows($hex_query) > 0) {
+                                        $hexIsPresent = "Hex value already exists in database. Choose another hex value.";
+                                    }
+                                    else if (strlen($hexValue) != 6) {
+                                        $hexIsPresent = "Hex value is not correct length (should be exactly 6)";
+                                    }
+
+                                    if ($colorIsPresent || $hexIsPresent) {
+                                        echo "<div class='error-box'>";
+                                        if ($colorIsPresent) echo "<p>$colorIsPresent</p>";
+                                        if ($hexIsPresent) echo "<p>$hexIsPresent</p>";
+                                        echo "</div>";
+                                    }
+
+                                    else {
+                                        mysqli_query($conn, "INSERT INTO colors (name, hex_value) VALUES('$colorName', '$hexValue');");
+                                    }
+                                    break;
+                                case 'deletecolor':
+                                    if (isset($_POST['deleteCheck'])) {
+                                    
+                                    $colorID = substr(strval($_POST["colorlist"]), 1);
+                                    mysqli_query($conn, "DELETE FROM colors WHERE name = '$colorID'");
+                                    }
+                                    break;
+                            }
+                        }
+                    }
+                    ?>
+                    <!-- Edit color values -->
+                    <form method="post" action = "">
+                        <label for ="sel_color">Select a Color:</label><br>
+                        <?php
+                            $current_colors = mysqli_query($conn, "SELECT * FROM colors;");
+                            echo "<select name='colorlist'>";
+                            if (mysqli_num_rows($current_colors) > 0) {
+                                while($row = mysqli_fetch_assoc($current_colors)) {
+                                    echo "<option value='>" . $row["name"] . "'>" . "$row[name]" . "</option>";
+                                }
+                            }
+                            echo "</select><br><br>";
+                        ?>
+
+                        <label for="cname">Edit color name:</label><br>
+                        <input type="text" name="cname"><br>
+                        <label for="hexval">Edit hex value (6 letters or digits):</label><br>
+                        <input type="text" name="hexval"><br><br>
+
+                        <button class="changeColor" name="btnSubmit[]" value="editcolor">Change color values</button>
+                    </form> </th>
+
+                    <!-- // Add color values -->
+                    <th>
+                    <form method="post" action = "">
+                        <label>Add a new color</label><br><br>
+                        <label for="cname">Color name:</label><br>
+                        <input type="text" name="cname"><br>
+                        <label for="hexval">Hex value (6 letters or digits):</label><br>
+                        <input type="text" name="hexval"><br><br>
+
+                        <button class="addColor" name="btnSubmit[]" value="addcolor">Add color</button>
+                    </form> </th>
+
+                    <!-- // Delete color values -->
+                    <th>
+                    <form method="post" action = "">
+                        <label for ="sel_color">Delete a Color:</label><br>
+                        <?php
+                            $current_colors = mysqli_query($conn, "SELECT * FROM colors;");
+                            if (mysqli_num_rows($current_colors) > 2) {
+                                echo "<select name='colorlist'>";
+                                while($row = mysqli_fetch_assoc($current_colors)) {
+                                    echo "<option value='>" . $row["name"] . "'>" . "$row[name]" . "</option>";
+                                }
+                                echo "</select><br><br><button id='deleteColorBtn' name='btnSubmit[]' value='deletecolor'>Delete color</button><br> <input type='checkbox' id='deleteConfirmation' name='deleteCheck' value='DELETE'><label for='deleteConfirmation'> ARE YOU SURE? </label>";
+                            }
+                            else {
+                                echo "<p> Cannot delete a color if there are only 2 colors left. Please add more colors if you want to remove one.</p>";
+                            }
+                        ?>
+                    </form> </th> </table>
+
+                    <!-- Display the table of colors -->
+                    <?php
                         $current_colors = mysqli_query($conn, "SELECT * FROM colors;");
                         echo "<table style='border-spacing:10px; margin:10px auto;'> <tr><th style='width:15%;'>Color Name</th> <th style='width:15%;'>Hexcode</th> <th style='width:15%;'>Sample color</th></tr>";
                         if (mysqli_num_rows($current_colors) > 0) {
@@ -60,24 +187,12 @@ require 'db.php';
                                 echo "<td>" . $row["name"]. "</td> <td>#" . $row["hex_value"]. "</td> <td style ='background:#" . $row["hex_value"] . "'></td> ";
                                 echo "</tr>";
                             }
-                        } 
+                        }
                         else {
                             echo "0 results";
                         }
                         echo "</table>"
                     ?>
-
-                    <!-- Form -->
-                    <form method="post" action="">
-                        <label>Rows and Columns (1-26):</label><br>
-                        <input type="number" name="size"><br><br>
-
-                        <label>Number of Colors (1-10):</label><br>
-                        <input type="number" name="colors"><br><br>
-
-                        <input type="submit" value="Generate Table">
-                    </form>
-
                     <br>
                 </div>
                 </div>
