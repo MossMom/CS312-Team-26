@@ -51,7 +51,6 @@ require 'db.php';
                         if (isset($_POST['btnSubmit'][0])) {
                             switch (strtolower($_POST['btnSubmit'][0])) {
                                 case 'editcolor':
-                                    echo '<h1>Edit button was clicked</h1>';
                                     $colorName = strval($_POST["cname"]);
                                     $hexValue = strval($_POST["hexval"]);
                                     $colorID = substr(strval($_POST["colorlist"]), 1);
@@ -83,7 +82,6 @@ require 'db.php';
                                     }
                                     break;
                                 case 'addcolor':
-                                    echo '<h1>Add button was clicked</h1>';
                                     $colorName = strval($_POST["cname"]);
                                     $hexValue = strval($_POST["hexval"]);
 
