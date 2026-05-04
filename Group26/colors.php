@@ -150,13 +150,10 @@ require 'db.php';
                     
                     <!-- Form -->
                     <form method="post" action="">
-                        <label>Rows and Columns (1-26):</label><br>
-                        <input type="number" name="size"><br><br>
+                        
 
-                        <label>Number of Colors (1-<?php echo $maxColors; ?>):</label><br>
-                        <input type="number" name="colors" max="<?php echo $maxColors; ?>"><br><br>
-
-                        <input type="submit" value="Generate Table">
+                        <label>Number of Colors: <?php echo $maxColors; ?>:</label><br>
+                    
                     </form>
 
                     <!-- Edit color values -->
