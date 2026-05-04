@@ -49,6 +49,10 @@ require 'db.php';
                     $colorIsPresent = "";
                     $hexIsPresent = "";
 
+                    $result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM colors");
+                    $row = mysqli_fetch_assoc($result);
+                    $maxColors = (int)$row['total'];
+
                     if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         if (isset($_POST['btnSubmit'][0])) {
                             switch (strtolower($_POST['btnSubmit'][0])) {
@@ -98,7 +102,6 @@ require 'db.php';
                                     $colorName = mysqli_real_escape_string($conn, strval($_POST["cname"]));
                                     $hexValue  = mysqli_real_escape_string($conn, strval($_POST["hexval"]));
 
-                                    // FIX: no $colorID used here
                                     $color_query = mysqli_query($conn,
                                         "SELECT * FROM colors WHERE name = '$colorName'"
                                     );
@@ -178,7 +181,7 @@ require 'db.php';
                         <button class="changeColor" name="btnSubmit[]" value="editcolor">Change color values</button>
                     </form> </th>
 
-                    <!-- // Add color values -->
+                    <!--  Add color values -->
                     <th>
                     <form method="post" action = "">
                         <label>Add a new color</label><br><br>
@@ -190,7 +193,7 @@ require 'db.php';
                         <button class="addColor" name="btnSubmit[]" value="addcolor">Add color</button>
                     </form> </th>
 
-                    <!-- // Delete color values -->
+                    <!--  Delete color values -->
                     <th>
                     <form method="post" action = "">
                         <label for ="sel_color">Delete a Color:</label><br>
